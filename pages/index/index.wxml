@@ -1,0 +1,140 @@
+<!-- 今天吃什么 - 主页面 -->
+<view class="container">
+  <!-- 自定义导航栏 -->
+  <view class="custom-navbar" style="padding-top: {{statusBarHeight}}px;">
+    <view class="navbar-content">
+      <text class="navbar-title">今天吃什么</text>
+      <view class="navbar-share" bindtap="onShareTap">
+        <text class="share-icon">↗</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 偏好设置区 -->
+  <view class="preference-section">
+    <text class="section-subtitle">设置你的用餐偏好</text>
+    <view class="preference-grid">
+      <view 
+        class="preference-btn {{preferences.mode === 'liked' ? 'active' : ''}}"
+        bindtap="onPreferenceTap"
+        data-mode="liked"
+      >
+        <text class="preference-icon">+</text>
+        <text class="preference-text">想吃的</text>
+      </view>
+      <view 
+        class="preference-btn {{preferences.mode === 'disliked' ? 'active' : ''}}"
+        bindtap="onPreferenceTap"
+        data-mode="disliked"
+      >
+        <text class="preference-icon">-</text>
+        <text class="preference-text">不想吃的</text>
+      </view>
+      <view 
+        class="preference-btn {{preferences.mode === 'canEat' ? 'active' : ''}}"
+        bindtap="onPreferenceTap"
+        data-mode="canEat"
+      >
+        <text class="preference-icon">✓</text>
+        <text class="preference-text">能吃的</text>
+      </view>
+      <view 
+        class="preference-btn {{preferences.mode === 'cannotEat' ? 'active' : ''}}"
+        bindtap="onPreferenceTap"
+        data-mode="cannotEat"
+      >
+        <text class="preference-icon">✗</text>
+        <text class="preference-text">不能吃的</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 翻牌抽选区 -->
+  <view class="flip-section">
+    <view class="flip-grid">
+      <view 
+        wx:for="{{foodCards}}" 
+        wx:key="id"
+        class="flip-card {{item.isFlipped ? 'flipped' : ''}} {{item.isSelected ? 'selected' : ''}}"
+      >
+        <view class="card-container">
+          <!-- 正面 -->
+          <view class="card-front">
+            <text class="card-placeholder">点击翻牌</text>
+          </view>
+          
+          <!-- 背面 -->
+          <view class="card-back">
+            <text class="food-icon">{{item.icon}}</text>
+            <text class="food-name">{{item.name}}</text>
+          </view>
+        </view>
+        
+        <!-- 选中效果 -->
+        <view class="selected-overlay" wx:if="{{item.isSelected}}">
+          <text class="selected-text">就是它！</text>
+        </view>
+      </view>
+    </view>
+    <button 
+      class="start-btn {{isFlipping ? 'loading' : ''}}" 
+      bindtap="onStartFlip"
+      disabled="{{isFlipping}}"
+    >
+      {{isFlipping ? '抽签中...' : '开始抽签'}}
+    </button>
+  </view>
+
+  <!-- 优选推荐区 -->
+  <view class="recommendation-section">
+    <text class="section-title">为你找到以下优选</text>
+    
+    <!-- 筛选标签 -->
+    <scroll-view class="filter-tags" scroll-x="true">
+      <view class="tag-list">
+        <view 
+          wx:for="{{filterTags}}" 
+          wx:key="id"
+          class="filter-tag {{item.active ? 'active' : ''}}"
+        >
+          {{item.name}}
+        </view>
+      </view>
+    </scroll-view>
+
+    <!-- 餐厅列表 -->
+    <view class="restaurant-list">
+      <view 
+        wx:for="{{restaurants}}" 
+        wx:key="id"
+        class="restaurant-card"
+      >
+        <view class="restaurant-info">
+          <text class="restaurant-name">{{item.name}}</text>
+          <view class="restaurant-meta">
+            <text class="rating-text">★ {{item.rating}} ({{item.ratingCount}})</text>
+            <text class="delivery-time">{{item.deliveryTime}}</text>
+            <text class="price-info">{{item.price}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 社交分享区 -->
+  <view class="social-section">
+    <text class="section-title">大家都在吃</text>
+    <scroll-view class="share-scroll" scroll-x="true">
+      <view class="share-list">
+        <view 
+          wx:for="{{shareList}}" 
+          wx:key="id"
+          class="share-card"
+        >
+          <text class="user-nickname">{{item.nickname}}</text>
+          <text class="food-description">{{item.description}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
