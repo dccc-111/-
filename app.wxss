@@ -1,0 +1,177 @@
+/* 全局样式 - 极简黑白风格 */
+
+/* 重置样式 */
+page {
+  background-color: #f8f8f8;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  color: #333333;
+  line-height: 1.4;
+}
+
+/* 全局容器 */
+.container {
+  padding: 0 20rpx;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* 通用按钮样式 */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 16rpx;
+  font-size: 32rpx;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.btn-primary {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.btn-primary:active {
+  background-color: #000000;
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background-color: #ffffff;
+  color: #333333;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary:active {
+  background-color: #f5f5f5;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);
+}
+
+/* 卡片样式 */
+.card {
+  background-color: #ffffff;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.card:active {
+  transform: scale(0.98);
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);
+}
+
+/* 文字层级 */
+.text-title {
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #000000;
+}
+
+.text-subtitle {
+  font-size: 32rpx;
+  font-weight: 500;
+  color: #333333;
+}
+
+.text-body {
+  font-size: 28rpx;
+  font-weight: 400;
+  color: #666666;
+}
+
+.text-caption {
+  font-size: 24rpx;
+  font-weight: 400;
+  color: #999999;
+}
+
+/* 间距系统 */
+.mt-xs { margin-top: 16rpx; }
+.mt-sm { margin-top: 24rpx; }
+.mt-md { margin-top: 32rpx; }
+.mt-lg { margin-top: 48rpx; }
+.mt-xl { margin-top: 64rpx; }
+
+.mb-xs { margin-bottom: 16rpx; }
+.mb-sm { margin-bottom: 24rpx; }
+.mb-md { margin-bottom: 32rpx; }
+.mb-lg { margin-bottom: 48rpx; }
+.mb-xl { margin-bottom: 64rpx; }
+
+.p-xs { padding: 16rpx; }
+.p-sm { padding: 24rpx; }
+.p-md { padding: 32rpx; }
+.p-lg { padding: 48rpx; }
+
+/* 布局工具类 */
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 网格布局 */
+.grid {
+  display: grid;
+  gap: 16rpx;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* 动画效果 */
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scale-in {
+  animation: scaleIn 0.2s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

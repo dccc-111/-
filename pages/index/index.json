@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "flip-card": "../../components/flip-card/flip-card",
+    "restaurant-card": "../../components/restaurant-card/restaurant-card",
+    "share-card": "../../components/share-card/share-card"
+  },
+  "navigationBarTitleText": "今天吃什么",
+  "navigationStyle": "custom",
+  "backgroundColor": "#f8f8f8"
+}

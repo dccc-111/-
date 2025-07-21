@@ -1,0 +1,140 @@
+<!-- 今天吃什么 - 主页面 -->
+<view class="container">
+  <!-- 自定义导航栏 -->
+  <view class="custom-navbar" style="padding-top: {{statusBarHeight}}px;">
+    <view class="navbar-content">
+      <text class="navbar-title">今天吃什么</text>
+      <view class="navbar-share" bindtap="onShareTap">
+        <image src="../../images/share.svg" class="share-icon" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 偏好设置区 -->
+  <view class="preference-section">
+    <text class="section-subtitle">设置你的用餐偏好</text>
+    <view class="preference-grid">
+      <view 
+        class="preference-btn {{preferences.mode === 'liked' ? 'active' : ''}}"
+        bindtap="onPreferenceTap"
+        data-mode="liked"
+      >
+        <text class="preference-icon">+</text>
+        <text class="preference-text">想吃的</text>
+      </view>
+      <view 
+        class="preference-btn {{preferences.mode === 'disliked' ? 'active' : ''}}"
+        bindtap="onPreferenceTap"
+        data-mode="disliked"
+      >
+        <text class="preference-icon">-</text>
+        <text class="preference-text">不想吃的</text>
+      </view>
+      <view 
+        class="preference-btn {{preferences.mode === 'canEat' ? 'active' : ''}}"
+        bindtap="onPreferenceTap"
+        data-mode="canEat"
+      >
+        <text class="preference-icon">✓</text>
+        <text class="preference-text">能吃的</text>
+      </view>
+      <view 
+        class="preference-btn {{preferences.mode === 'cannotEat' ? 'active' : ''}}"
+        bindtap="onPreferenceTap"
+        data-mode="cannotEat"
+      >
+        <text class="preference-icon">✗</text>
+        <text class="preference-text">不能吃的</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 翻牌抽选区 -->
+  <view class="flip-section">
+    <view class="flip-grid">
+      <flip-card 
+        wx:for="{{foodCards}}" 
+        wx:key="id"
+        card-data="{{item}}"
+        is-flipped="{{item.isFlipped}}"
+        is-selected="{{item.isSelected}}"
+        bind:cardtap="onCardTap"
+      />
+    </view>
+    <button 
+      class="start-btn {{isFlipping ? 'loading' : ''}}" 
+      bindtap="onStartFlip"
+      disabled="{{isFlipping}}"
+    >
+      {{isFlipping ? '抽签中...' : '开始抽签'}}
+    </button>
+  </view>
+
+  <!-- 优选推荐区 -->
+  <view class="recommendation-section">
+    <text class="section-title">为你找到以下优选</text>
+    
+    <!-- 筛选标签 -->
+    <scroll-view class="filter-tags" scroll-x="true">
+      <view class="tag-list">
+        <view 
+          wx:for="{{filterTags}}" 
+          wx:key="id"
+          class="filter-tag {{item.active ? 'active' : ''}}"
+          bindtap="onFilterTap"
+          data-id="{{item.id}}"
+        >
+          {{item.name}}
+        </view>
+      </div>
+    </scroll-view>
+
+    <!-- 商家列表 -->
+    <view class="restaurant-list">
+      <restaurant-card 
+        wx:for="{{restaurants}}" 
+        wx:key="id"
+        restaurant="{{item}}"
+        bind:cardtap="onRestaurantTap"
+      />
+    </view>
+  </view>
+
+  <!-- 社交分享区 -->
+  <view class="social-section">
+    <text class="section-title">大家都在吃</text>
+    <scroll-view class="share-scroll" scroll-x="true">
+      <view class="share-list">
+        <share-card 
+          wx:for="{{shareList}}" 
+          wx:key="id"
+          share-data="{{item}}"
+          bind:cardtap="onShareCardTap"
+        />
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 底部安全区域 -->
+  <view class="safe-area-bottom"></view>
+</view>
+
+<!-- 底部导航栏 -->
+<view class="bottom-navbar">
+  <view class="navbar-item {{currentTab === 0 ? 'active' : ''}}" bindtap="onTabTap" data-index="0">
+    <image src="../../images/home.svg" class="navbar-icon" />
+    <text class="navbar-text">首页</text>
+  </view>
+  <view class="navbar-item {{currentTab === 1 ? 'active' : ''}}" bindtap="onTabTap" data-index="1">
+    <image src="../../images/discover.svg" class="navbar-icon" />
+    <text class="navbar-text">发现</text>
+  </view>
+  <view class="navbar-item {{currentTab === 2 ? 'active' : ''}}" bindtap="onTabTap" data-index="2">
+    <image src="../../images/favorite.svg" class="navbar-icon" />
+    <text class="navbar-text">收藏</text>
+  </view>
+  <view class="navbar-item {{currentTab === 3 ? 'active' : ''}}" bindtap="onTabTap" data-index="3">
+    <image src="../../images/profile.svg" class="navbar-icon" />
+    <text class="navbar-text">我的</text>
+  </view>
+</view>

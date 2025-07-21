@@ -1,0 +1,41 @@
+<!-- 餐厅卡片组件 -->
+<view class="restaurant-card" bindtap="onCardTap">
+  <!-- 餐厅图片 -->
+  <image 
+    class="restaurant-image" 
+    src="{{restaurant.image}}" 
+    mode="aspectFill"
+    lazy-load="true"
+  />
+  
+  <!-- 餐厅信息 -->
+  <view class="restaurant-info">
+    <!-- 餐厅名称 -->
+    <text class="restaurant-name">{{restaurant.name}}</text>
+    
+    <!-- 评分和配送信息 -->
+    <view class="restaurant-meta">
+      <!-- 评分 -->
+      <view class="rating-section">
+        <view class="stars">
+          <text class="star" wx:for="{{starArray}}" wx:key="index">★</text>
+        </view>
+        <text class="rating-text">{{restaurant.rating}} ({{restaurant.ratingCount}})</text>
+      </view>
+      
+      <!-- 配送时间 -->
+      <view class="delivery-info">
+        <image class="clock-icon" src="../../images/clock.svg" />
+        <text class="delivery-time">{{restaurant.deliveryTime}}</text>
+      </view>
+      
+      <!-- 价格 -->
+      <text class="price-info">{{restaurant.price}}</text>
+    </view>
+  </view>
+  
+  <!-- 右箭头 -->
+  <view class="arrow-icon">
+    <image src="../../images/arrow-right.svg" class="arrow" />
+  </view>
+</view>

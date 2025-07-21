@@ -1,0 +1,26 @@
+<!-- 分享卡片组件 -->
+<view class="share-card" bindtap="onCardTap">
+  <!-- 用户头像 -->
+  <view class="user-avatar">
+    <image 
+      class="avatar-image" 
+      src="{{shareData.avatar}}" 
+      mode="aspectFill"
+      lazy-load="true"
+    />
+  </view>
+  
+  <!-- 用户昵称 -->
+  <text class="user-nickname">{{shareData.nickname}}</text>
+  
+  <!-- 美食图片 -->
+  <image 
+    class="food-image" 
+    src="{{shareData.foodImage}}" 
+    mode="aspectFill"
+    lazy-load="true"
+  />
+  
+  <!-- 描述文字 -->
+  <text class="food-description">{{shareData.description}}</text>
+</view>

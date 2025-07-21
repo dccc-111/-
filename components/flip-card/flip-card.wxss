@@ -1,0 +1,160 @@
+/* 翻牌组件样式 - 实现3D翻转动画效果 */
+
+/* 翻牌卡片容器 - 设置3D透视效果 */
+.flip-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1; /* 保持正方形比例 */
+  perspective: 1000rpx; /* 3D透视距离，营造立体感 */
+  cursor: pointer;
+}
+
+/* 卡片内容容器 - 承载翻转动画 */
+.card-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d; /* 保持3D变换效果 */
+  transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1); /* 流畅的翻转动画 */
+}
+
+/* 翻转状态 - Y轴旋转180度实现翻牌效果 */
+.flip-card.flipped .card-container {
+  transform: rotateY(180deg);
+}
+
+/* 选中状态 - 放大并提升层级突出显示 */
+.flip-card.selected {
+  transform: scale(1.05); /* 轻微放大 */
+  z-index: 10; /* 提升层级 */
+}
+
+/* 选中状态阴影效果 - 增强视觉反馈 */
+.flip-card.selected .card-container {
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.2);
+}
+
+/* 卡片正面 */
+.card-front {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  border: 2rpx solid #f0f0f0;
+}
+
+.card-placeholder {
+  font-size: 28rpx;
+  color: #999999;
+  font-weight: 400;
+}
+
+/* 卡片背面 */
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  border: 2rpx solid #333333;
+}
+
+.food-icon {
+  font-size: 48rpx;
+  margin-bottom: 16rpx;
+}
+
+.food-name {
+  font-size: 24rpx;
+  color: #333333;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* 选中覆盖层 */
+.selected-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 215, 0, 0.9);
+  border-radius: 16rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  animation: selectedPulse 1s ease-in-out infinite alternate;
+}
+
+.selected-text {
+  font-size: 28rpx;
+  color: #333333;
+  font-weight: 600;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
+}
+
+/* 选中动画 */
+@keyframes selectedPulse {
+  from {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+/* 点击反馈 */
+.flip-card:active {
+  transform: scale(0.95);
+}
+
+.flip-card.selected:active {
+  transform: scale(1.02);
+}
+
+/* 响应式适配 */
+@media (max-width: 375px) {
+  .food-icon {
+    font-size: 40rpx;
+  }
+  
+  .food-name {
+    font-size: 20rpx;
+  }
+  
+  .card-placeholder {
+    font-size: 24rpx;
+  }
+  
+  .selected-text {
+    font-size: 24rpx;
+  }
+}
+
+/* 翻牌动画优化 */
+.flip-card .card-container {
+  will-change: transform;
+}
+
+/* 防止翻牌过程中的闪烁 */
+.card-front,
+.card-back {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
